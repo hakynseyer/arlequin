@@ -1,0 +1,23 @@
+{
+  "name": "jrs/arlequin",
+  "type": "library",
+  "description": "Framework PHP basado en middlewares",
+  "keywords": ["package", "arlequin", "demo"],
+  "homepage": "https://github.com/hakynseyer/arlequin",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Joaquin Reyes Sanchez",
+      "email": "hakynseyer@gmail.com",
+      "homepage": "https://www.linkedin.com/in/joaquin-reyes-sanchez-11751b243/"
+    }
+  ],
+  "require": {
+    "php": ">=8.1.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Arlequin\\": "src/"
+    }
+  }
+}
