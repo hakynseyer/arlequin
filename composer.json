@@ -1,7 +1,7 @@
 {
   "name": "jrs/arlequin",
   "type": "library",
-  "description": "Framework PHP basado en middlewares",
+  "description": "Micro Framework PHP basado en middlewares",
   "keywords": ["package", "arlequin", "demo"],
   "homepage": "https://github.com/hakynseyer/arlequin",
   "license": "MIT",
@@ -13,7 +13,17 @@
     }
   ],
   "require": {
-    "php": ">=8.1.6"
+    "php": ">=8.1.6",
+    "twig/twig": "^3.0",
+    "illuminate/database": "^9.17",
+    "kint-php/kint": "^4.1",
+    "doctrine/orm": "^2.12",
+    "doctrine/dbal": "^3.3",
+    "doctrine/annotations": "^1.13",
+    "symfony/cache": "^6.1",
+    "doctrine/migrations": "^3.5",
+    "firebase/php-jwt": "^6.2",
+    "vlucas/phpdotenv": "^5.4"
   },
   "autoload": {
     "psr-4": {
