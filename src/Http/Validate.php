@@ -166,4 +166,28 @@ class Validate {
 
     return $error;
   }
+
+  public static function val_EmptyOptional_Type_Min_Max(
+    $data,
+    $type,
+    $min,
+    $max
+  ) {
+    $error = null;
+
+    if (Validate::empty($data) === null) {
+      $error = Validate::type($data, $type);
+      if ($error === null) {
+        $error = Validate::min($data, $min);
+        if ($error === null) {
+          $error = Validate::max($data, $max);
+          if ($error === null) {
+            return null;
+          }
+        }
+      }
+    }
+
+    return $error;
+  }
 }

@@ -7,13 +7,13 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 class Authentication {
-  public static function generate(array $data = []) {
+  public static function generate(array $data = [], integer $exp = 60) {
     $time = time();
     $token = null;
 
     $payload_init = [
       'iat' => $time,
-      'exp' => $time + 60 * 5, // segundos * minutos * horas * dias ...
+      'exp' => $time + $exp, // segundos * minutos * horas * dias ...
       'aud' => $_ENV['TOKEN_AUD'],
       'iss' => $_ENV['TOKEN_ISS'],
     ];
