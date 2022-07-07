@@ -7,7 +7,7 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 class Authentication {
-  public static function generate(array $data = [], integer $exp = 60) {
+  public static function generate(array $data = [], int $exp = 60) {
     $time = time();
     $token = null;
 
