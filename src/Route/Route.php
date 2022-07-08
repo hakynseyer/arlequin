@@ -8,6 +8,21 @@ use Arlequin\{Middleware, Redirect, Url};
 
 class Route extends Router_Tools {
   public static function init() {
+    if ($_ENV['MODE'] === 'dev') {
+      header(
+        'Access-Control-Allow-Origin: ' .
+          $_ENV['HOST_DEV'] .
+          ':' .
+          $_ENV['HOST_DEV_PORT']
+      );
+    } elseif ($_ENV['MODE'] === 'prod') {
+      header('Access-Control-Allow-Origin: ' . $_ENV['HOST']);
+    }
+
+    header('Access-Control-Allow-Headers: *');
+    header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
+    header('Allow: GET, POST, PUT, DELETE');
+
     $baseDir = __DIR__ . '/../../../../../' . $_ENV['ARLEQUIN_VIEWS_PATH'];
 
     $views = scandir($baseDir);
