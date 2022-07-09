@@ -7,6 +7,23 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 class Authentication {
+  private static function getAud(): string {
+    $aud = '';
+
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+      $aud = $_SERVER['HTTP_CLIENT_IP'];
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+      $aud = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } else {
+      $aud = $_SERVER['REMOTE_ADDR'];
+    }
+
+    $aud .= @$_SERVER['HTTP_USER_AGENT'];
+    $aud .= gethostname();
+
+    return sha1($aud);
+  }
+
   public static function generate(array $data = [], int $exp = 60) {
     $time = time();
     $token = null;
@@ -14,7 +31,7 @@ class Authentication {
     $payload_init = [
       'iat' => $time,
       'exp' => $time + $exp, // segundos * minutos * horas * dias ...
-      'aud' => $_ENV['TOKEN_AUD'],
+      'aud' => self::getAud(),
       'iss' => $_ENV['TOKEN_ISS'],
     ];
 
@@ -30,8 +47,20 @@ class Authentication {
   }
 
   public static function decode($token) {
-    if (isset($token) && !empty($token)) {
-      return JWT::decode($token, new Key($_ENV['TOKEN_KEY'], 'HS256'));
+    $decode = null;
+
+    try {
+      if (isset($token) && !empty($token)) {
+        $decode = JWT::decode($token, new Key($_ENV['TOKEN_KEY'], 'HS256'));
+
+        if ($decode->aud === self::getAud()) {
+          return $decode;
+        }
+      }
+    } catch (\Exception $e) {
+      throw new \Exception('TOKEN | No se pudo obtener el token');
     }
+
+    return $decode;
   }
 }

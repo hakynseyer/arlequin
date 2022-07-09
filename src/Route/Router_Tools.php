@@ -172,4 +172,19 @@ class Router_Tools {
 
     return $success;
   }
+
+  protected static function getSessionToken() {
+    $theHeaders = Headers::getHeaders();
+
+      foreach ($theHeaders as $header => $value) {
+        if (strtolower($header) === 'authorization') {
+          $auth_explode = explode(' ', $value);
+          
+          if (strtolower(auth_explode[0]) === 'token') {
+            Route_Args::init()->setKeyFirstReq('auth', $auth_explode[1])
+            break
+          }
+        }
+      }
+  }
 }

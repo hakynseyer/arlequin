@@ -74,7 +74,7 @@ class Route extends Router_Tools {
           if (self::valNumberParams($url, $urlSystem)) {
             if (self::valEqualParts($url, $urlSystem, $routeSystem)) {
               if (self::valMethod()) {
-                //TODO: Crear el manejador de sesiones
+                self::getSessionToken()
                 $success = true;
                 break;
               }
