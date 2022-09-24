@@ -25,6 +25,9 @@ class Render {
   }
 
   public function view($view, $args = []) {
+    if ($_ENV['MODE_FRONTEND'] === 'spa')
+      throw new \Exception('La configuración (ENV FILE) no esta habilitada para frontend SSR');
+
     $isView = gettype($view) === 'string';
     $isArgs = gettype($args) === 'array';
 

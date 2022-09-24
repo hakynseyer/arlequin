@@ -11,9 +11,9 @@ class Route extends Router_Tools {
     if ($_ENV['MODE'] === 'dev') {
       header(
         'Access-Control-Allow-Origin: ' .
-          $_ENV['HOST_DEV'] .
+          $_ENV['BACKEND_HOST'] .
           ':' .
-          $_ENV['HOST_DEV_PORT']
+          $_ENV['BACKEND_PORT']
       );
     } elseif ($_ENV['MODE'] === 'prod') {
       header('Access-Control-Allow-Origin: ' . $_ENV['HOST']);
@@ -23,7 +23,7 @@ class Route extends Router_Tools {
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
     header('Allow: GET, POST, PUT, DELETE');
 
-    $baseDir = __DIR__ . '/../../../../../' . $_ENV['ARLEQUIN_VIEWS_PATH'];
+    $baseDir = __DIR__ . '/../../../../../' . $_ENV['BACKEND_ROUTES'];
 
     $views = scandir($baseDir);
 
@@ -31,7 +31,7 @@ class Route extends Router_Tools {
       foreach ($views as $view) {
         if ($view !== '.' && $view !== '..') {
           $controller =
-            $baseDir . '/' . $view . '/' . $view . '_controller.php';
+            $baseDir . '/' . $view . '/' . $view . '_routes.php';
           if (is_file($controller)) {
             require_once $controller;
           }
