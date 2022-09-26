@@ -11,12 +11,15 @@ class Route extends Router_Tools {
     if ($_ENV['MODE'] === 'dev') {
       header(
         'Access-Control-Allow-Origin: ' .
-          $_ENV['BACKEND_HOST'] .
+          $_ENV['FRONTEND_HOST'] .
           ':' .
-          $_ENV['BACKEND_PORT']
+          $_ENV['FRONTEND_PORT']
       );
     } elseif ($_ENV['MODE'] === 'prod') {
-      header('Access-Control-Allow-Origin: ' . $_ENV['HOST']);
+      if ($_ENV['FRONTEND_HOST'] === 'ARLEQUIN_DIRECTORY')
+        header('Access-Control-Allow-Origin: *');
+      else
+        header('Access-Control-Allow-Origin: ' . $_ENV['FRONTEND_HOST']);
     }
 
     header('Access-Control-Allow-Headers: *');
