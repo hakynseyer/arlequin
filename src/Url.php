@@ -23,6 +23,7 @@ class Url {
     'GET' => [],
     'POST' => [],
     'PUT' => [],
+    'PATCH' => [],
     'DELETE' => [],
   ];
 
@@ -31,6 +32,7 @@ class Url {
       'GET' => [],
       'POST' => [],
       'PUT' => [],
+      'PATCH' => [],
       'DELETE' => [],
     ];
   }

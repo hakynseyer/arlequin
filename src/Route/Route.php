@@ -152,6 +152,10 @@ class Route extends Router_Tools {
     self::methodHTTP('put', $route, $middlewares);
   }
 
+  public static function patch($route, ...$middlewares) {
+    self::methodHTTP('patch', $route, $middlewares);
+  }
+
   public static function delete($route, ...$middlewares) {
     self::methodHTTP('delete', $route, $middlewares);
   }

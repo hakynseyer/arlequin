@@ -142,9 +142,11 @@ class Router_Tools {
         }
         break;
       case 'PUT':
+      case 'PATCH':
       case 'DELETE':
         if (
           Route_Args::init()->getFirstReq()['method'] === 'put' ||
+          Route_Args::init()->getFirstReq()['method'] === 'patch' ||
           Route_Args::init()->getFirstReq()['method'] === 'delete'
         ) {
           $theHeaders = Headers::getHeaders();

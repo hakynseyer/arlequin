@@ -23,6 +23,7 @@ class Route_Args {
     'GET' => [],
     'POST' => [],
     'PUT' => [],
+    'PATCH' => [],
     'DELETE' => [],
   ];
 
